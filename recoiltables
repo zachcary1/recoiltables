@@ -1,0 +1,37 @@
+import keyboard
+import time
+import win32api
+ 
+upCount = 0
+leftCount = 0
+rightCount = 0
+index = 1
+ 
+while True:
+    if keyboard.is_pressed('up'):
+        upCount = upCount + 1
+        win32api.mouse_event(0x0001, 0, -1)
+    if keyboard.is_pressed('left'):
+        leftCount = leftCount + 1
+        win32api.mouse_event(0x0001, -1, 0)
+    if keyboard.is_pressed('right'):
+        rightCount = rightCount - 1
+        win32api.mouse_event(0x0001, 1, 0)
+    if keyboard.is_pressed('down'):
+        upCount = upCount - 1
+        win32api.mouse_event(0x0001, 0, 1)
+        
+    if keyboard.is_pressed('home'):
+        print('\n' + str(index))
+        index = index + 1
+        
+        leftandright = str(leftCount + rightCount)
+        
+        print("{" + leftandright + "," + str(upCount) + "}")
+        
+        upCount = 0
+        leftCount = 0
+        rightCount = 0
+        
+        time.sleep(0.3)
+    time.sleep(0.0025)
